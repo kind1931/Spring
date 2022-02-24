@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  
+<filter>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<filter-class>com.jsp.filter.CharacterEncodingFilter</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<url-pattern>*</url-pattern>
+</filter-mapping>
+
+<filter>
+	<filter-name>sitemesh</filter-name>
+	<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+</filter>
+
+<filter-mapping>
+	<filter-name>sitemesh</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+	
+	<servlet>
+		<servlet-name>memberListServlet</servlet-name>
+		<servlet-class>com.jsp.controller.MemberListServlet</servlet-class>
+		<init-param>
+			<param-name>sqlSessionFactory</param-name>
+			<param-value>com.jsp.datasource.OracleMybatisSqlSessionFactory</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberDAO</param-name>
+			<!-- <param-value>com.jsp.dao.MemberDAOImpl</param-value> -->
+			<param-value>com.jsp.dao.MemberDAOImpl</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberService</param-name>
+			<param-value>com.jsp.service.MemberServiceImpl</param-value>
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>memberListServlet</servlet-name>
+		<url-pattern>/member/list.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>memberDetailServlet</servlet-name>
+		<servlet-class>com.jsp.controller.MemberDetailServlet</servlet-class>
+		<init-param>
+			<param-name>sqlSessionFactory</param-name>
+			<param-value>com.jsp.datasource.OracleMybatisSqlSessionFactory</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberDAO</param-name>
+			<!-- <param-value>com.jsp.dao.MemberDAOImpl</param-value> -->
+			<param-value>com.jsp.dao.MemberDAOImpl</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberService</param-name>
+			<param-value>com.jsp.service.MemberServiceImpl</param-value>
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>memberDetailServlet</servlet-name>
+		<url-pattern>/member/detail.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>memeberInsertServlet</servlet-name>
+		<servlet-class>com.jsp.controller.MemeberInsertServlet</servlet-class>
+		<init-param>
+			<param-name>sqlSessionFactory</param-name>
+			<param-value>com.jsp.datasource.OracleMybatisSqlSessionFactory</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberDAO</param-name>
+			<!-- <param-value>com.jsp.dao.MemberDAOImpl</param-value> -->
+			<param-value>com.jsp.dao.MemberDAOImpl</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberService</param-name>
+			<param-value>com.jsp.service.MemberServiceImpl</param-value>
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>memeberInsertServlet</servlet-name>
+		<url-pattern>/member/register.do</url-pattern>
+	</servlet-mapping>
+		<!--update  -->
+		<servlet>
+		<servlet-name>MemberUpdateServlet</servlet-name>
+		<servlet-class>com.jsp.controller.MemberUpdateServlet</servlet-class>
+		<init-param>
+			<param-name>sqlSessionFactory</param-name>
+			<param-value>com.jsp.datasource.OracleMybatisSqlSessionFactory</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberDAO</param-name>
+			<!-- <param-value>com.jsp.dao.MemberDAOImpl</param-value> -->
+			<param-value>com.jsp.dao.MemberDAOImpl</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberService</param-name>
+			<param-value>com.jsp.service.MemberServiceImpl</param-value>
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberUpdateServlet</servlet-name>
+		<url-pattern>/member/modify.do</url-pattern>
+	</servlet-mapping>
+		<!--delete  -->
+		<servlet>
+		<servlet-name>MemeberDeleteServlet</servlet-name>
+		<servlet-class>com.jsp.controller.MemeberDeleteServlet</servlet-class>
+		<init-param>
+			<param-name>sqlSessionFactory</param-name>
+			<param-value>com.jsp.datasource.OracleMybatisSqlSessionFactory</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberDAO</param-name>
+			<!-- <param-value>com.jsp.dao.MemberDAOImpl</param-value> -->
+			<param-value>com.jsp.dao.MemberDAOImpl</param-value>
+		</init-param>
+		<init-param>
+			<param-name>memberService</param-name>
+			<param-value>com.jsp.service.MemberServiceImpl</param-value>
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemeberDeleteServlet</servlet-name>
+		<url-pattern>/member/delete.do</url-pattern>
+	</servlet-mapping>
+</web-app>

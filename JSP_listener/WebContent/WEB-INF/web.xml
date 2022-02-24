@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 맵핑x -> name 
+서블릿-사용자요청, 필터-요청방식에 관계없이 해야할때
+사용자 요청이 없어도 톰캣구동될때 실행이 되어야 되는 녀석-->
+<web-app>
+<!-- 	공통으로 쓰는 파라미터  : listener 뿐만아니라 쓸수 있다.-->
+<!-- 	공통으로 쓰는 파라미터  : 그해반해 initpara은 해당태그를 감싼 녀석만 쓸수 있다.-->
+	<context-param>
+		<param-name>message </param-name>
+		<param-value>good day!</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>com.jsp.listener.TestListener</listener-class>
+	</listener>
+</web-app>
