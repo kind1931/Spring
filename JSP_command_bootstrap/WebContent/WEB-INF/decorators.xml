@@ -11,4 +11,7 @@
 		<pattern>/main.do</pattern>		
 	</decorator>
 
+	<exclude>
+		<pattern>/resources/*</pattern>
+	</exclude>
 </decorators>	
