@@ -140,7 +140,7 @@
 				</div><!-- register-card-body -->
 			</div>
 		</div>
-	</section>		<!-- /.content -->
+	</section>	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
@@ -149,7 +149,7 @@
 	<input id="inputFile" name="pictureFile" type="file" class="form-control"
 		onchange="picture_go();" style="display:none;" />
 	<input id="oldFile" type="hidden" name="oldPicture" value="" />
-	<input type="hidden" name="checkUpload" value="0" />
+	<input type="hidden" name="checkUpload" value="0" /> <!-- flag -->
 </form>
 
 <script>
@@ -160,7 +160,29 @@
 		console.log(form);
 		var picture = form.find('[name=pictureFile]')[0];
 		
+		formData = new FormData($('form[role="imageForm"]')[0]);
+		
+		//이미지 확장자 jpg 확인
+		var fileFormat = picture.value.substr(picture.value.lastIndexOf(".")+1).toUpperCase();
+		if(!(fileFormat=="JPG" || fileFormat=="JPEG" )) {
+			alert("이미지는 jpg/jpeg 형식만 가능합니다.");
+			picture.value="";	//파일태그가 선택안된상태로 (초기화)
+			return;
+		}
+		
+		//이미지 파일 용량 체크
+		if(picture.files[0].size>1024*1024*1){
+			alert("사진 용량은 1MB 이하면 가능합니다.");
+			picture.value="";
+			return;
+		};
+		
+		//업로드 확인변수 초기화 (사진변경)
+		form.find('[name="checkUpload"]').val(0);
+		document.getElementById('inputFileName').value=picture.files[0].name;
+		
 		if (picture.files && picture.files[0]) {
+			
 			var reader = new FileReader();
 			
 			reader.onload = function (e) {
@@ -174,5 +196,57 @@
 			reader.readAsDataURL(picture.files[0]);
 		}
 	}
+	
+	function upload_go(){
+// 		alert('upload btn click');
+
+		if(!$('input[name="pictureFile"]').val()) {
+			alert("사진을 선택하세요.");
+			$('input[name="pictureFile"]').click();
+			return;
+		}
+		if($('input[name="checkUpload"]').val()==1){
+			alert("이미지업로드 된 사진입니다.");
+			return;
+		}
+			
+		$.ajax({
+			url:"picture.do",
+			data:formData,
+			type:'post',
+			processData:false,
+			contentType:false,
+			success:function(data){
+				//업로드 확인변수 세팅
+				$('input[name="checkUpload"]').val(1);
+				//저장된 파일명 저장.
+				$('input#oldFile').val(data);	// 변경시 삭제될 파일명
+				$('form[role="form"] input[name="picture"]').val(data); 
+				//나중에 업로드된 파일의 위치를 DB에 등록(매핑)할 때 필요.
+				alert("사진이 업로드 되었습니다.");
+			},
+			error:function(error){
+				alert("현재 사진 업로드가 불가합니다.\n 관리자에게 연락합니다.");
+			}
+		});
+	}
+	
+	var checkID ="";
+	function idCheck_go(){
+// 		alert("id check btn click");
+		
+		var input_ID=$('input[name="id"]');
+		
+		if(!input_ID.val()){
+			alert("아이디를 입력하시오");
+			input_ID.focus();
+			return;
+		}
+		
+		$.ajax({
+			
+		});
+	}
+	
 </script>
 </body>
